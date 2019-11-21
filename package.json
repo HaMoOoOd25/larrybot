@@ -1,0 +1,19 @@
+{
+  "name": "larrybot",
+  "version": "1.0.0",
+  "description": "Discord bot for Donut Shop server",
+  "main": "larrybot",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "HaMoOoOd25#7712",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "enmap": "^5.2.3",
+    "mongoose": "^5.7.10",
+    "ms": "^2.1.2",
+    "parse-ms": "^2.1.0",
+    "quick.db": "^7.0.0-b22"
+  }
+}
