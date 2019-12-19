@@ -27,7 +27,7 @@ fs.readdir("./events/", (err, files) => {
 });
 
 //command handler
-const commands = ["messages", "misc", "moderation"]; //Add economy later!!!
+const commands = ["messages", "misc", "moderation", "economy", "shop", "donuts", "Interactions"];
 for (let i = 0; i < commands.length; i++){
     fs.readdir(`./commands/${commands[i]}/`, (err, files) => {
         if (err) return console.error(err);

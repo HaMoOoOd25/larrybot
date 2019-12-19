@@ -3,7 +3,7 @@ const configFile = require("../botconfig");
 
 function SendMessage(msg,...message){
     const embed = new Discord.RichEmbed()
-        .setAuthor(msg.author.username, msg.author.avatarURL)
+        .setAuthor(msg.author.tag, msg.author.avatarURL)
         .setColor("#FF0000")
         .setDescription(...message);
     msg.channel.send(embed).then(msg => {
@@ -46,4 +46,13 @@ module.exports.noUserError = (message) => {
 module.exports.databaseError = (message, error) => {
     SendMessage(message, "Database error.");
     console.log(error);
+};
+
+//Shop related errors
+module.exports.notFoundItem = (message, item) => {
+    SendMessage(message, `We don't have that item that is called **${item}**.`);
+};
+
+module.exports.noEnoughCoins = (message, userBalance, cost, item) => {
+    SendMessage(message, `You need **${cost - userBalance}** more coins to buy **${item}**.`);
 };

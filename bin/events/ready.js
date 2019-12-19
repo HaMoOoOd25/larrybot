@@ -1,6 +1,6 @@
 const mongoDb = require("mongoose");
 const messagesSchema = require("../utils/Schemas/messagesSchema");
-//const drops = require("../utils/drops");
+const drops = require("../utils/drops");
 const Discord = require("discord.js");
 
 module.exports = (bot) => {
@@ -48,10 +48,10 @@ module.exports = (bot) => {
     // }, 3600000);
 
 
-    // setInterval(function () {
-    //     drops.drop(bot);
-    // }, 7200000);
-    //
+    setInterval(function () {
+        drops.drop(bot);
+    }, 7200000);
+
     // setInterval(function () {
     //     drops.reactionDrop(bot)
     // }, 1.44e+7)//1.44e+7

@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "name": "milk",
+      "description" : "Use it to make donuts",
+      "price": 5,
+      "amount" : 1
+    },
+    {
+      "name": "flour",
+      "description": "Use it to make donuts",
+      "price": 5,
+      "amount": 1
+    },
+    {
+      "name": "eggs",
+      "description": "Use it to make donuts",
+      "price": 10,
+      "amount": 2
+    },
+    {
+      "name": "donuts",
+      "description": "Donuts are cool, you eat them like a boss.",
+      "price": 20,
+      "amount": 1
+    },
+    {
+      "name": "superdonut",
+      "description": "Eat it for a special role!",
+      "price": 1000,
+      "amount": 1
+    }
+  ]
+}
