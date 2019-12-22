@@ -40,7 +40,7 @@ module.exports.messageReceived = async (message, bot) => {
             .setFooter("Reply to confirm your message to the staff.", bot.user.avatarURL);
         try{
             await message.author.send(newTicketEmbed);
-        }catch{}
+        }catch(e){ }
 
         modMailChannel.send(NotifyEmbed);
         message.author.dmChannel.startTyping();

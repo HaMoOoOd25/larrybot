@@ -27,7 +27,7 @@ module.exports.run = async (bot, message, args, messageArray) => {
         try{
             await tUser.send(messageEmbed);
             tUser.user.dmChannel.stopTyping();
-        }catch{
+        }catch(e){
         }
     }else{
         let noTicket = new Discord.RichEmbed()

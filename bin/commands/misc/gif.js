@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const giphy = require('giphy-api')('kEecNEDJz9HznzuvgRdJSi5h8IPVvKT5');
 module.exports.run = async (bot, message, args, messageArray) => {
-
+    if (message.channel.id === bot.settings.mainChatChannel) return;
     const searchName = args.join(" ") || "random";
 
     giphy.search({

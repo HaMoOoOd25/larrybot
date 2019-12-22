@@ -35,7 +35,7 @@ module.exports.run = async (bot, message, args, messageArray) => {
         try {
             await tUser.send(notify);
             tUser.user.dmChannel.stopTyping();
-        } catch {}
+        } catch (e) {}
     }else{
         let noTicket = new Discord.RichEmbed()
             .setAuthor(message.author.username, message.author.avatarURL)

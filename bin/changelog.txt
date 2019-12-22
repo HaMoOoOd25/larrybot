@@ -29,6 +29,9 @@
 -stare
 -tickle
 
+**__Security__**
+-Verification system
+
 **__Use .help (Command) for command info__**
 
 

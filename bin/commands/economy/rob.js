@@ -102,7 +102,7 @@ module.exports.run = async (bot, message, args, messageArray) => {
                     .setAuthor(message.author.username, message.author.avatarURL)
                     .setColor("FF0000")
                     .attachFile(attachment)
-                    .setThumbnail("attachment://robber.png")
+                    .setThumbnail("attachment://coin.png")
                     .setDescription(`You got busted and fined ${fine} coins.`);
                 message.channel.send(robFailEmbed);
                 return;
@@ -128,7 +128,7 @@ module.exports.run = async (bot, message, args, messageArray) => {
             const EarnedEmbed = new Discord.RichEmbed()
                 .setAuthor(message.author.username, message.author.avatarURL)
                 .attachFile(attachment)
-                .setThumbnail("attachment://robber.png")
+                .setThumbnail("attachment://coin.png")
                 .setDescription(`${message.author}, you have robbed ${toDeduct} coins from ${toRob}.`)
                 .setColor(bot.settings.embedColor);
             message.channel.send(EarnedEmbed);

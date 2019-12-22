@@ -26,7 +26,7 @@ function clearMessageLeaderboard(message, bot) {
             if (!res[0]) {
                 try {
                     await message.guild.owner.user.send(`${message.guild.owner}, leaderboard reset but no winner was identified.`);
-                }catch {}
+                }catch(e) {}
                 return
             }
 
@@ -45,7 +45,7 @@ function clearMessageLeaderboard(message, bot) {
                 try {
                     await message.guild.owner.user.send(ResetedEmbed);
                     await message.guild.owner.user.send(`${message.guild.owner}`);
-                }catch {}
+                }catch(e) {}
             }else{
                 const noWinner = new Discord.RichEmbed()
                     .setColor(bot.settings.embedColor)
@@ -54,7 +54,7 @@ function clearMessageLeaderboard(message, bot) {
                 try {
                     await message.guild.owner.user.send(noWinner);
                     await message.guild.owner.user.send(`${message.guild.owner}`);
-                }catch {}
+                }catch(e) {}
             }
 
         }
