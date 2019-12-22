@@ -1,38 +1,5 @@
-**__Economy__**
--work
--rob
--daily
--balance
--donate
--withdraw
--deposit
--topbal
-
-**__Donut Shop__**
--shop
--buy
--cook
--eat
--feed
--inventory
--superdonut
--info
-
-**__Fun__**
--gif
--slap
--kick
--kiss
--hug
--pat
--smile
--stare
--tickle
-
 **__Security__**
 -Verification system
-
-**__Use .help (Command) for command info__**
 
 
 

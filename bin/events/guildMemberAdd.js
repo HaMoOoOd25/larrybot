@@ -42,7 +42,7 @@ module.exports = (bot, member) => {
         }
     });
 
-    collector.on('end', collected => {
+    collector.on('end', async collected => {
         if (verify === true){
             member.addRole(role, "Verified").catch(e => {
                 console.log(e);
@@ -52,10 +52,8 @@ module.exports = (bot, member) => {
             });
         }else{
             try{
-                member.user.send("You failed to verify yourself!");
-            }catch (e) {
-
-            }
+                await member.user.send("You failed to verify yourself!");
+            }catch (e) {}
             member.kick("Didn't verify correctly for three times.").catch(e => {
                 console.log(e);
             });
