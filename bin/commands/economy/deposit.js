@@ -13,7 +13,7 @@ module.exports.run = (bot, message, args, messageArray) => {
         guildID: message.guild.id,
         userID: message.author.id
     }, (err, coins) => {
-        if (err) return errors.databaseError(message, err);
+        if (err) return errors.databaseError(message, err, __filename);
 
         if (!coins || coins.coins < 1) {
             const noCoinsEmbed = new Discord.RichEmbed()
@@ -51,7 +51,7 @@ module.exports.run = (bot, message, args, messageArray) => {
             }
             coins.coins = coins.coins - toDeposit;
             coins.bank = coins.bank + toDeposit;
-            coins.save().catch(err => errors.databaseError(message, err));
+            coins.save().catch(err => errors.databaseError(message, err, __filename));
 
             const attachment = new Discord.Attachment(path.resolve(__dirname, "../../images/coin.png").toString(), "coin.png");
             const depositedEmbed =  new Discord.RichEmbed()

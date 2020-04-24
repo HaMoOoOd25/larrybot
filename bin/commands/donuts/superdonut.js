@@ -12,7 +12,7 @@ module.exports.run = async (bot, message, args, messageArray) => {
         guildID: message.guild.id,
         userID: message.author.id
     }, (err, inventory) => {
-        if (err) return errors.databaseError(message, err);
+        if (err) return errors.databaseError(message, err, __filename);
 
         if (!inventory || inventory.items.superdonut <= 0) {
             const noDonutEmbed = new Discord.RichEmbed()
@@ -22,7 +22,7 @@ module.exports.run = async (bot, message, args, messageArray) => {
             message.channel.send(noDonutEmbed);
         }else{
             inventory.items.superdonut--;
-            inventory.save().catch(err => errors.databaseError(err, message));
+            inventory.save().catch(err => errors.databaseError(err, message, __filename));
             message.member.addRole(roleToAdd).catch(err => console.log(err));
             const attachment = new Discord.Attachment(path.resolve(__dirname, "../../images/superdonut.png").toString(), "superdonut.png");
             const ateDonut = new Discord.RichEmbed()

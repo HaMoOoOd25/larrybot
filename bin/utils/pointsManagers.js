@@ -14,7 +14,7 @@ module.exports.messagePoints = (bot, message) => {
         guildID: message.guild.id,
         userID: message.author.id
     }, (err, res) => {
-        if (err) return errors.databaseError(message, err);
+        if (err) return errors.databaseError(message, err, __filename);
 
         if (!res){
             const newData = new messagesSchema({
@@ -22,11 +22,11 @@ module.exports.messagePoints = (bot, message) => {
                 userID: message.author.id,
                 points: 1
             });
-            newData.save().catch(err => errors.databaseError(message, err));
+            newData.save().catch(err => errors.databaseError(message, err, __filename));
         }else{
             res.points += 1;
 
-            res.save().catch(err => errors.databaseError(message, err));
+            res.save().catch(err => errors.databaseError(message, err, __filename));
         }
         messagesCoolDownSet.add(message.author.id);
 

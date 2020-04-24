@@ -8,6 +8,8 @@ module.exports.messageReceived = async (message, bot) => {
     let guild = bot.guilds.get(settings.guildID);
     let modMailChannel = guild.channels.find(channel => channel.id === bot.settings.modMailChannel);
 
+    if (!modMailChannel) return;
+
     let NotifyEmbed = new Discord.RichEmbed()
         .setColor(settings.embedColor)
         .setAuthor(message.author.tag, message.author.avatarURL)

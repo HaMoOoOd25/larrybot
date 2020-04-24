@@ -10,7 +10,7 @@ module.exports.run = (bot, message, args, messageArray) => {
         guildID: message.guild.id,
         userID: message.author.id
     }, (err, inventory) => {
-        if (err) return errors.databaseError(message, err);
+        if (err) return errors.databaseError(message, err, __filename);
 
         if (inventory){
             bag = inventory.items;

@@ -51,7 +51,7 @@ module.exports.run = async (bot, message, args, messageArray) => {
         guildID: message.guild.id,
         userID: toRob.user.id
     }, (err, res) => {
-        if (err) return errors.databaseError(message, err);
+        if (err) return errors.databaseError(message, err, __filename);
 
         if (!res || res.coins < 1) {
             const robFailEmbed = new Discord.RichEmbed()
@@ -71,7 +71,7 @@ module.exports.run = async (bot, message, args, messageArray) => {
 
             res.coins = res.coins - toDeduct;
             res.save().catch(err => {
-                errors.databaseError(message);
+                errors.databaseError(message, __filename);
                 console.log(err);
             });
         }
@@ -81,7 +81,7 @@ module.exports.run = async (bot, message, args, messageArray) => {
             userID: message.author.id
         }, (err, res) => {
             if (err) {
-                errors.databaseError(message);
+                errors.databaseError(message, __filename);
                 return console.log(err);
             }
 
@@ -94,7 +94,7 @@ module.exports.run = async (bot, message, args, messageArray) => {
                     fine = Math.floor((res.coins || 0) * 0.25);
                     res.coins = res.coins - fine;
                     res.save().catch(err => {
-                        errors.databaseError(message);
+                        errors.databaseError(message, __filename);
                         console.log(err);
                     });
                 }
@@ -115,13 +115,13 @@ module.exports.run = async (bot, message, args, messageArray) => {
                     coins: toDeduct
                 });
                 newData.save().catch(err => {
-                    errors.databaseError(message);
+                    errors.databaseError(message, __filename);
                     console.log(err);
                 });
             }else{
                 res.coins = res.coins + toDeduct;
                 res.save().catch(err => {
-                    errors.databaseError(message);
+                    errors.databaseError(message, __filename);
                     console.log(err);
                 });
             }

@@ -12,12 +12,12 @@ module.exports.drop = (bot) => {
     const max = Math.floor(100 + 1);
     const prize = Math.floor(Math.random() * (max - min) + min);
 
-    const attachment = new Discord.Attachment(path.resolve(__dirname, "../../images/coin.png").toString(), "coin.png");
+    const attachment = new Discord.Attachment(path.resolve(__dirname, "../images/coin.png").toString(), "coin.png");
     const dropEmbed = new Discord.RichEmbed()
         .setAuthor(bot.user.username, bot.user.avatarURL)
         .setTitle("New Drop")
         .attachFile(attachment)
-        .setThumbnail("attachment://coin.ping")
+        .setThumbnail("attachment://coin.png")
         .setColor(bot.settings.embedColor)
         .setDescription(`A donut has appeared, the first person to **.eat** it is rewarded ${prize} amount of coins.`);
     channel.send(dropEmbed).then(async msg => {
@@ -38,7 +38,7 @@ module.exports.drop = (bot) => {
                     guildID: guild.id,
                     userID: collectedMsg.author.id
                 }, (err, res) => {
-                    if (err) return errors.databaseError(message, err);
+                    if (err) return errors.databaseError(message, err, __filename);
 
                     if (!res){
                         const newData = coinsSchema({
@@ -47,10 +47,10 @@ module.exports.drop = (bot) => {
                             coins: prize,
                             bank:0
                         });
-                        newData.save().catch(err => errors.databaseError(message, err));
+                        newData.save().catch(err => errors.databaseError(message, err, __filename));
                     }else{
                         res.coins += prize;
-                        res.save().catch(err => errors.databaseError(message, err));
+                        res.save().catch(err => errors.databaseError(message, err, __filename));
                     }
                 })
             }

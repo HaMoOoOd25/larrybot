@@ -18,7 +18,7 @@ module.exports.run = (bot, message, args, messageArray) => {
             guildID: message.guild.id,
             userID: member.id
         }, async (err, result) => {
-            if (err) return errors.databaseError(message, err);
+            if (err) return errors.databaseError(message, err, __filename);
 
             if (!result){
                 const newData = {
@@ -26,10 +26,10 @@ module.exports.run = (bot, message, args, messageArray) => {
                     userID: member.id,
                     coins: amountToadd
                 };
-                newData.save().catch(err => errors.databaseError(message, err));
+                newData.save().catch(err => errors.databaseError(message, err, __filename));
             }else{
                 result.coins += amountToadd;
-                result.save().catch(err => errors.databaseError(message, err));
+                result.save().catch(err => errors.databaseError(message, err, __filename));
             }
             const attachment = new Discord.Attachment(path.resolve(__dirname, "../../images/coin.png").toString(), "coin.png");
             const addedEmbed = new Discord.RichEmbed()

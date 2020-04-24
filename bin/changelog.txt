@@ -1,6 +1,7 @@
-**__Security__**
--Verification system
+**__Fixes__**
 
+- Fixed Verification system
+- Fixed Drops image attachment
 
 
 

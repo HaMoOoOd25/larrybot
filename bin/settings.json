@@ -1,11 +1,10 @@
 {
   "mongoDb" : "mongodb+srv://admin:31045@robot-xi9jt.gcp.mongodb.net/test?retryWrites=true&w=majority",
-  "embedColor" : "#fe6ff9",
-  "mainChatChannel" : "583720527026192396",
-  "botCommandsChannel" : "586894247572013076",
-  "modMailChannel" : "644528969256796171",
-  "guildID" : "403564806071648258",
-  "welcomeChannel": "583720527026192396",
-  "suggestionChannel" : "644535389243179019",
-  "verificationChannel" : "658046051126738975"
+  "embedColor" : "#ff6781",
+  "mainChatChannel" : "658684838408093715",
+  "botCommandsChannel" : "658684843886116865",
+  "modMailChannel" : "658684834880815131",
+  "guildID" : "658683684257267732",
+  "welcomeChannel": "658684838408093715",
+  "verificationChannel" : "verification"
 }

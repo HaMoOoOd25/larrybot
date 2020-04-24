@@ -19,11 +19,13 @@ module.exports.run = async (bot, message, args, messageArray) => {
             guildID: message.guild.id,
             userID: message.author.id
         }, (err, user) => {
-           if (err) return errors.databaseError(message, err);
+           if (err) return errors.databaseError(message, err, __filename);
 
            if (user){
                user.eatenDonuts++;
-               user.save().catch(err => errors.databaseError(message, err));
+               user.save().catch(err => {
+                   return errors.databaseError(message, err, __filename);
+               });
                if (user.eatenDonuts === 500){
                    const donutAddictRole = message.guild.roles.find(r => r.name === "Donut Addict");
                    message.member.addRole(donutAddictRole).catch(err => console.log(err));
@@ -41,7 +43,9 @@ module.exports.run = async (bot, message, args, messageArray) => {
                    feededDonuts: 0,
                    cookedDonuts: 0,
                });
-               newUser.save().catch(err => errors.databaseError(message, err));
+               newUser.save().catch(err => {
+                   return errors.databaseError(message, err, __filename);
+               });
            }
         });
     }
@@ -50,7 +54,7 @@ module.exports.run = async (bot, message, args, messageArray) => {
         guildID: message.guild.id,
         userID: message.author.id
     }, (err, inventory) => {
-        if (err) return errors.databaseError(message, err);
+        if (err) return errors.databaseError(message, err, __filename);
 
         if (!inventory || inventory.items.donuts <= 0) {
             const noDonutEmbed = new Discord.RichEmbed()
@@ -60,7 +64,9 @@ module.exports.run = async (bot, message, args, messageArray) => {
             message.channel.send(noDonutEmbed);
         }else{
             inventory.items.donuts--;
-            inventory.save().catch(err => errors.databaseError(err, message));
+            inventory.save().catch(err => {
+                return errors.databaseError(message, err, __filename);
+            });
             addDonut();
             const attachment = new Discord.Attachment(path.resolve(__dirname, "../../images/donut.png").toString(), "donut.png");
             const ateDonut = new Discord.RichEmbed()

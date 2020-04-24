@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const configFile = require("../botconfig");
+const logHandler = require("./logHandler");
 
 function SendMessage(msg,...message){
     const embed = new Discord.RichEmbed()
@@ -27,10 +28,6 @@ module.exports.noAmountError = (message) => {
     SendMessage(message, "Please specify an amount.");
 };
 
-module.exports.botNoPermission = (message) => {
-    SendMessage(message, "I don't have permission to do that!");
-};
-
 module.exports.wrongCommandUsage = (message, cmd) => {
     SendMessage(message, `**Incorrect Command Usage.**\n\n` + '``' + `${configFile.prefix}${cmd}` + '``');
 };
@@ -43,12 +40,6 @@ module.exports.noUserError = (message) => {
     SendMessage(message, "User not found.");
 };
 
-module.exports.databaseError = (message, error) => {
-    SendMessage(message, "Database error.");
-    console.log(error);
-};
-
-//Shop related errors
 module.exports.notFoundItem = (message, item) => {
     SendMessage(message, `We don't have that item that is called **${item}**.`);
 };
@@ -56,3 +47,28 @@ module.exports.notFoundItem = (message, item) => {
 module.exports.noEnoughCoins = (message, userBalance, cost, item) => {
     SendMessage(message, `You need **${cost - userBalance}** more coins to buy **${item}**.`);
 };
+
+//Errors to show on console
+
+module.exports.databaseError = (message, error, filename) => {
+    filename = filename.replace(/^.*[\\\/]/, '');
+
+    SendMessage(message, "Database Error.");
+    logHandler.error(`Database Error: ${filename} : ${error}`);
+};
+
+module.exports.roleManageFail = (error, filename) => {
+    filename = filename.replace(/^.*[\\\/]/, '');
+    logHandler.error(`Failed To Add/Remove Role: ${filename} : ${error}`);
+};
+
+module.exports.botNoPermission = (message, filename) => {
+    filename = filename.replace(/^.*[\\\/]/, '');
+    SendMessage(message, "I don't have permission to do that!");
+};
+
+module.exports = (error, filename) => {
+    filename = filename.replace(/^.*[\\\/]/, '');
+    logHandler.error(`Error: ${filename} : ${error}`);
+};
+

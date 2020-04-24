@@ -11,10 +11,12 @@ module.exports.run = async (bot, message, args, messageArray) => {
             guildID: message.guild.id,
             userID: message.author.id
         }, (err, user) => {
-            if (err) return errors.databaseError(message, err);
+            if (err) return errors.databaseError(message, err, __filename);
             if (user){
                 user.cookedDonuts++;
-                user.save().catch(err => errors.databaseError(message, err));
+                user.save().catch(err => {
+                    return errors.databaseError(message, err, __filename);
+                });
                 if (user.cookedDonuts === 1000){
                     const donutChefRole = message.guild.roles.find(r => r.name === "Donut Chef");
                     message.member.addRole(donutChefRole).catch(err => console.log(err));
@@ -28,7 +30,9 @@ module.exports.run = async (bot, message, args, messageArray) => {
                     feededDonuts: 0,
                     cookedDonuts: 1,
                 });
-                newUser.save().catch(err => errors.databaseError(message, err));
+                newUser.save().catch(err => {
+                    return errors.databaseError(message, err, __filename);
+                });
             }
         });
     }
@@ -42,7 +46,7 @@ module.exports.run = async (bot, message, args, messageArray) => {
         guildID: message.guild.id,
         userID: message.author.id
     }, (err, inventory) => {
-        if (err) return errors.databaseError(message, err);
+        if (err) return errors.databaseError(message, err, __filename);;
 
         const result = Math.floor(Math.random() * 100);
         if (!inventory || inventory.items.eggs < eggsCost || inventory.items.flour < flourCost || inventory.items.milk < milkCost){
@@ -75,7 +79,9 @@ module.exports.run = async (bot, message, args, messageArray) => {
         inventory.items.eggs -= eggsCost;
         inventory.items.flour -= flourCost;
         inventory.items.milk -= milkCost;
-        inventory.save().catch(err => errors.databaseError(message, err));
+        inventory.save().catch(err => {
+            return errors.databaseError(message, err, __filename);
+        });
     });
 
 };

@@ -34,7 +34,7 @@ function clearMessageLeaderboard(message, bot) {
 
             //We clear the list
             messagesSchema.deleteMany({}, (err, res) => {
-                if (err) return errors.databaseError(message, err);
+                if (err) return errors.databaseError(message, err, __filename);
             });
 
             if (winner) {

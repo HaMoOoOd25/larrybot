@@ -16,7 +16,7 @@ module.exports.run = (bot, message, args, messageArray) => {
         guildID: message.guild.id,
         userID: member.id
     }, (err, user) => {
-        if (err) return errors.databaseError(message, err);
+        if (err) return errors.databaseError(message, err, __filename);
         if (user){
             eatenDonuts = user.eatenDonuts;
             feedDonuts = user.feededDonuts;

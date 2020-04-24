@@ -9,6 +9,7 @@
   "author": "HaMoOoOd25#7712",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^3.0.0",
     "discord.js": "^11.5.1",
     "enmap": "^5.2.3",
     "fs": "0.0.1-security",

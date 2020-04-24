@@ -13,10 +13,10 @@ module.exports.run = (bot, message, args, messageArray) => {
             guildID: message.guild.id,
             userID: message.author.id
         }, (err, inventory) => {
-            if (err) return errors.databaseError(message, err);
+            if (err) return errors.databaseError(message, err, __filename);
             if (inventory){
                 inventory.items[item] += amount;
-                inventory.save().catch(err => errors.databaseError(message, err));
+                inventory.save().catch(err => errors.databaseError(message, err, __filename));
             }else{
                 const newInv = new invSchema({
                     guildID: message.guild.id,
@@ -30,7 +30,7 @@ module.exports.run = (bot, message, args, messageArray) => {
                     }
                 });
                 newInv.items[item] += amount;
-                newInv.save().catch(err => errors.databaseError(message, err));
+                newInv.save().catch(err => errors.databaseError(message, err, __filename));
             }
         })
     }
@@ -41,14 +41,15 @@ module.exports.run = (bot, message, args, messageArray) => {
             guildID: message.guild.id,
             userID: message.author.id
         }, (err, user) => {
-            if (err) return errors.databaseError(message, err);
+            if (err) return errors.databaseError(message, err, __filename);
 
             if (!user || user.coins < cost || user.coins <= 0){
-                return errors.noEnoughCoins(message, user.coins || 0, cost, item);
+                let userCoins = (user === null) ? 0 : user.coins;
+                return errors.noEnoughCoins(message, userCoins, cost, item);
             }else{
                 addItem(item, amount);
                 user.coins -= cost;
-                user.save().catch(err => errors.databaseError(message, err));
+                user.save().catch(err => errors.databaseError(message, err, __filename));
                 const purchasedEmbed = new Discord.RichEmbed()
                     .setAuthor(message.author.tag, message.author.avatarURL)
                     .setColor(bot.settings.embedColor)

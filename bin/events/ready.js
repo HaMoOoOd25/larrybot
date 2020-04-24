@@ -33,6 +33,10 @@ module.exports = (bot) => {
     });
 
 
+    //Invite Tracker
+
+    const Invites = {};
+
 
     // setInterval(function () {
     //
@@ -50,9 +54,10 @@ module.exports = (bot) => {
 
     setInterval(function () {
         drops.drop(bot);
-    }, 7200000);
+    }, 3.6e+6);//3.6e+6
 
     // setInterval(function () {
     //     drops.reactionDrop(bot)
     // }, 1.44e+7)//1.44e+7
+
 };

@@ -16,7 +16,7 @@ module.exports.run = (bot, message, args, messageArray) => {
         guildID: message.guild.id,
         userID: member.user.id
     }, (err, coins) => {
-        if (err) return errors.databaseError(message, err);
+        if (err) return errors.databaseError(message, err, __filename);
         if (coins){
             balance = coins.coins;
             bank = coins.bank;
